@@ -24,9 +24,9 @@ export default function Home() {
 
       <main className="relative z-20 flex flex-col items-center justify-center h-full pointer-events-none">
         <div className="pointer-events-auto">
-          <h1 className="text-[54px] leading-[40px] md:text-[156px] md:leading-[115px] tracking-[-0.06em] text-white text-center">STAY TUNED</h1>
+          <h1 className="text-[54px] leading-[40px] md:text-[156px] md:leading-[115px] tracking-[-0.06em] text-white text-center">Stay Tuned</h1>
           <p className="text-[12px] md:text-[16px] leading-[12px] pt-10 text-white text-center">
-            WE'LL BE BACK SOON WITH A BANG.
+            We'll be back soon with a bang.
           </p>
         </div>
 
