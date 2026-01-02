@@ -4,6 +4,7 @@ import { useState } from "react"
 import Footer from "@/components/footer"
 import ProjectCard from "@/components/project-card"
 import { X, ArrowUpRight } from "lucide-react"
+import Image from "next/image"
 
 // Project type definitions
 interface BaseProject {
@@ -113,6 +114,29 @@ const projects: Project[] = [
     link: "https://www.equitasitinc.com/",
     popupImage: "/landing-page/Equitas Home 2.png",
   },
+  {
+    name: "Sushil Finance",
+    image: "/portfolio/sushil-finance.jpg",
+    tag: "APP Design",
+    type: "appdesign",
+    popupImages: [
+      "/sushil-finance/1 (3).jpg",
+      "/sushil-finance/Stocks.jpg",
+      "/sushil-finance/Indices.jpg",
+      "/sushil-finance/Details FUT.jpg",
+      "/sushil-finance/Market Depth.jpg",
+      "/sushil-finance/Portfolio - All.jpg",
+      "/sushil-finance/Mutual fund allocation.jpg",
+    ],
+  },
+  {
+    name: "MCA",
+    image: "/portfolio/MCA.jpg",
+    tag: "Next.js",
+    type: "website",
+    link: "https://www.mca.com/",
+    popupImage: "/landing-page/MCA.jpg",
+  }
 ]
 
 export default function Home() {
@@ -202,25 +226,35 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Content - Grid for app design, Single image for UI/UX */}
-            <div className="overflow-y-auto max-h-[calc(90vh-100px)] p-6">
+            {/* Content - Columns for app design, Single image for UI/UX */}
+            <div className="overflow-y-auto max-h-[calc(90vh-100px)] p-4 md:p-6">
               {selectedProject.type === "appdesign" && selectedProject.popupImages ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="columns-2 md:columns-3 gap-2 md:gap-4 space-y-4">
                   {selectedProject.popupImages.map((img, idx) => (
-                    <img
-                      key={idx}
-                      src={img}
-                      alt={`${selectedProject.name} screen ${idx + 1}`}
-                      className="w-full rounded-xl shadow-lg"
-                    />
+                    <div key={idx} className="relative mb-4 break-inside-avoid shadow-lg rounded-xl overflow-hidden">
+                      <Image
+                        src={img}
+                        alt={`${selectedProject.name} screen ${idx + 1}`}
+                        width={500}
+                        height={1000}
+                        className="w-full h-auto rounded-xl"
+                        loading="lazy"
+                      />
+                    </div>
                   ))}
                 </div>
               ) : (
-                <img
-                  src={(selectedProject.type === "website" || selectedProject.type === "uiux") ? selectedProject.popupImage : selectedProject.image}
-                  alt={`${selectedProject.name} full design`}
-                  className="w-full rounded-xl"
-                />
+                <div className="relative w-full">
+                  <Image
+                    src={(selectedProject.type === "website" || selectedProject.type === "uiux") ? selectedProject.popupImage : selectedProject.image}
+                    alt={`${selectedProject.name} full design`}
+                    width={1920}
+                    height={1080}
+                    className="w-full h-auto rounded-xl shadow-lg"
+                    loading="lazy"
+                    quality={75}
+                  />
+                </div>
               )}
             </div>
           </div>

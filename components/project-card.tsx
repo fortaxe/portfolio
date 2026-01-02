@@ -1,12 +1,17 @@
 import { ArrowUpRight } from "lucide-react"
+import Image from "next/image"
 
 function ProjectCard({ name, image, tag }: { name: string; image: string; tag?: string }) {
     return (
-        <div className="group relative w-full aspect-1800/2411 rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 shadow-md">
-            <img
+        <div className="group relative w-full aspect-1800/2411 rounded-2xl overflow-hidden cursor-pointer  hover:shadow-xl transition-all duration-300 hover:-translate-y-1 s">
+            <Image
                 src={image}
                 alt={name}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="eager"
+                quality={75}
             />
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
@@ -33,4 +38,3 @@ function ProjectCard({ name, image, tag }: { name: string; image: string; tag?: 
 }
 
 export default ProjectCard
-
