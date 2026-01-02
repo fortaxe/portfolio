@@ -5,8 +5,33 @@ import Footer from "@/components/footer"
 import ProjectCard from "@/components/project-card"
 import { X, ArrowUpRight } from "lucide-react"
 
+// Project type definitions
+interface BaseProject {
+  name: string
+  image: string
+  tag: string
+}
+
+interface WebsiteProject extends BaseProject {
+  type: "website"
+  link: string
+  popupImage: string
+}
+
+interface UIUXProject extends BaseProject {
+  type: "uiux"
+  popupImage: string
+}
+
+interface AppDesignProject extends BaseProject {
+  type: "appdesign"
+  popupImages: string[]
+}
+
+type Project = WebsiteProject | UIUXProject | AppDesignProject
+
 // Projects with name, image, tag (tech stack), type, and optional link/popup image(s)
-const projects = [
+const projects: Project[] = [
   {
     name: "Namaste Office",
     image: "/portfolio/Namaste Office.jpg",
@@ -36,10 +61,9 @@ const projects = [
     tag: "App Design",
     type: "appdesign",
     popupImages: [
-      "/portfolio/gurudhoondo/1.jpg",
-      "/portfolio/gurudhoondo/2.jpg",
-      "/portfolio/gurudhoondo/3.jpg",
-      "/portfolio/gurudhoondo/4.jpg",
+      "/guru/Home 2.jpg",
+      "/guru/Tutors.jpg",
+      "/guru/Single Tutor Profile.jpg",
     ],
   },
   {
@@ -103,12 +127,12 @@ export default function Home() {
       <main className="relative w-full min-h-screen overflow-hidden bg-white text-neutral-900">
 
         {/* Header */}
-        <header className="absolute top-0 w-full p-6 z-20 flex justify-center items-center max-w-[1440px] left-1/2 -translate-x-1/2">
+        <header className="absolute top-0 w-full p-4 md:p-6 z-20 flex justify-center items-center max-w-[1440px] left-1/2 -translate-x-1/2">
           <div className="text-xl font-bold tracking-widest uppercase text-neutral-900">Fortaxe</div>
         </header>
 
         {/* Hero Content */}
-        <div className="relative z-20 flex flex-col items-center mt-[120px] px-4 text-center max-w-7xl mx-auto">
+        <div className="relative z-20 flex flex-col items-center mt-[60px] md:mt-[120px]  text-center max-w-7xl mx-auto">
           <h1 className="text-[42px] md:text-[86px] font-bold mb-8 md:mb-15 leading-tight tracking-normal bg-linear-to-b from-neutral-900 to-neutral-500 bg-clip-text text-transparent">
             Our Portfolio
           </h1>
@@ -147,7 +171,7 @@ export default function Home() {
           >
             {/* Header with close and visit website buttons */}
             <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
-              {selectedProject.link && (
+              {selectedProject.type === "website" && selectedProject.link && (
                 <a
                   href={selectedProject.link}
                   target="_blank"
@@ -193,7 +217,7 @@ export default function Home() {
                 </div>
               ) : (
                 <img
-                  src={selectedProject.popupImage || selectedProject.image}
+                  src={(selectedProject.type === "website" || selectedProject.type === "uiux") ? selectedProject.popupImage : selectedProject.image}
                   alt={`${selectedProject.name} full design`}
                   className="w-full rounded-xl"
                 />
