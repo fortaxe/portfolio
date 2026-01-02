@@ -15,7 +15,9 @@ export default function Home() {
     <div className="relative w-full h-screen overflow-hidden bg-black">
       {/* Interactive Pixel Blast Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <PixelBlast />
+        <PixelBlast
+          color="#B2BEB5"
+        />
       </div>
 
 
